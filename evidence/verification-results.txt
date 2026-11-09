@@ -1,0 +1,32 @@
+DATABASE WEEK 7 - VERIFICATION RESULTS
+Environment: PostgreSQL 18.6; Flyway OSS 13.12.1
+Database: bootcamp_migrations
+
+1. Flyway migration history
+installed_rank | version | description | success
+1              | 1       | core tables | true
+2              | 2       | audit log   | true
+3              | 3       | categories  | true
+
+2. Tables verified in public schema
+- audit_log
+- categories
+- flyway_schema_history
+- students
+
+3. Read-only account test
+- SELECT from students: succeeded (the table was empty before API test insert).
+- UPDATE students: permission denied (expected).
+
+4. API account test
+- INSERT INTO students: INSERT 0 1 (succeeded).
+
+5. Audit trigger test
+tbl      | op     | student_name | changed_by
+students | INSERT | Bhan         | api
+
+6. Final student record
+student_id | first_name | last_name | age | course
+1          | Bhan       | Gatdet    | 25  | Database
+
+All verification checks completed successfully.
